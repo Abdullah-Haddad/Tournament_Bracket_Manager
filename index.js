@@ -1,6 +1,11 @@
 const express = require('express');
+var mongoose = require("mongoose");
 const app = express();
 const port = 3000;
+const mongoConnectionString = 'mongodb+srv://new-user_31:U9pYloBugi8cvaCN@mongodbserver.bwuzblx.mongodb.net/';
+
+mongoose.Promise = global.Promise;
+mongoose.connect(mongoConnectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
+    <script src="/scripts/teams_list.js"></script>
 
     <title>Tournament Bracket Manager</title>
 </head>
@@ -17,7 +18,23 @@
     </header>
 
     <article>
-        <p> lorem ipsum dolor </p>
+        <p> 
+            <form action="/submit" method="post">
+                <% for (let i = 1; i <= 8; i++) { %>
+                    <label for="team<%= i %>">Team <%= i %></label>
+                    <input class="field" type="text" name="team<%= i %>" size="32">
+                <% } %> <!--Code suggestion by ChatGPT--> 
+
+                <input class = "button" type="reset" value="Clear">
+
+                <button type = "button" id = "randomize">Randomize</button>
+
+                <button type="submit">Load</button>
+
+                
+               
+            </form>
+        </p>
     </article>
 
     <footer>
@@ -25,7 +42,7 @@
         <a href="https://github.com/Abdullah-Haddad">My Github</a>
         <br>
         <address>
-            <p>Email: [emails]</p>
+            <p>Emails: [emails]</p>
         </address>
     </footer>
 
