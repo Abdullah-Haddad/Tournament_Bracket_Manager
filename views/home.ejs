@@ -1,34 +1,19 @@
-<!DOCTYPE html>
+<!-- home.ejs -->
+<%- include('_header') %>
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
+
+  <!--Main Components of the home page-->
+  <div class="content">
+    <div class="textbox">
+        <h1>Welcome To The Tournament Bracket Manager</h1>
+        <h2>Your Gateway to Seamless Tournament Management</h3>
+        <p>Here, users can input eight teams, and upon submission, the system generates matchups, presenting an organized set of teams ready to compete in the tournament.</p>
+        <div class="btn-box">
+            <a href="#">Sign Up Now</a>
+            <a href="#"> Get Started</a>
+        </div>
+    </div>
     
+</div>
 
-    <title>Tournament Bracket Manager</title>
-</head>
-
-<body>
-
-    <header>
-        <h1>
-            Tournament Bracket Manager
-        </h1>
-    </header>
-
-    <article>
-        <p> lorem ipsum </p>
-    </article>
-
-    <footer>
-        <p>&copy; [Names] 2023 </p>
-        <a href="https://github.com/Abdullah-Haddad" >My Github <box-icon type='logo' name='github'></box-icon></a>
-        <br>
-        <address>
-            <p>Email: [emails]</p>
-        </address>
-    </footer>
-
-</body>
-</html>
+<%- include('_footer') %>
