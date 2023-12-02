@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <script src="/scripts/teams_list.js"></script>
 
     <title>Tournament Bracket Manager</title>
 </head>
@@ -19,32 +18,172 @@
 
     <article>
         <p> 
-            <form action="/submit" method="post">
-                <% for (let i = 1; i <= 8; i++) { %>
-                    <label for="team<%= i %>">Team <%= i %></label>
-                    <input class="field" type="text" name="team<%= i %>" size="32">
-                <% } %> <!--Code suggestion by ChatGPT--> 
-
-                <input class = "button" type="reset" value="Clear">
-
-                <button type = "button" id = "randomize">Randomize</button>
-
-                <button type="submit">Load</button>
-
+            <form>
                 
-               
+                <h2>Enter Teams</h2>
+
+                <label for="team1">Team 1:</label>
+                <input type="text" name="team1">
+
+                VS.
+
+                <label for="team2">Team 2:</label>
+                <input type="text" name="team2">
+
+                <hr>
+
+                <label for="team3">Team 3:</label>
+                <input type="text" name="team3">
+
+                VS.
+
+                <label for="team4">Team 4:</label>
+                <input type="text" name="team4">
+
+                <hr>
+
+                <label for="team5">Team 5:</label>
+                <input type="text" name="team5">
+
+                VS.
+
+                <label for="team6">Team 6:</label>
+                <input type="text" name="team6">
+
+                <hr>
+
+                <label for="team7">Team 7:</label>
+                <input type="text" name="team7">
+
+                VS.
+
+                <label for="team8">Team 8:</label>
+                <input type="text" name="team8">
+
+                <hr>
+
+                <label for="team9">Team 9:</label>
+                <input type="text" name="team9">
+
+                VS.
+
+                <label for="team10">Team 10:</label>
+                <input type="text" name="team10">
+
+                <hr>
+
+                <label for="team11">Team 11:</label>
+                <input type="text" name="team11">
+
+                VS.
+
+                <label for="team12">Team 12:</label>
+                <input type="text" name="team12">
+
+                <hr>
+
+                <label for="team13">Team 13:</label>
+                <input type="text" name="team13">
+
+                VS.
+
+                <label for="team14">Team 14:</label>
+                <input type="text" name="team14">
+
+                <hr>
+
+                <label for="team15">Team 15:</label>
+                <input type="text" name="team15">
+
+                VS.
+
+                <label for="team16">Team 16:</label>
+                <input type="text" name="team16">
+
+                <hr>
+
+                <button type="submit" onclick="main().catch(console.error)" id="submit_button">Submit</button>
+                <button type="button" onclick="randomizer_button()" id="toggle_button">Random</button>
+                <input class="button" type="reset" class ="button" value="Clear">
+
             </form>
         </p>
     </article>
 
     <footer>
         <p>&copy; [Names] 2023 </p>
-        <a href="https://github.com/Abdullah-Haddad">My Github</a>
+        <a href="https://github.com/Abdullah-Haddad">Github</a>
         <br>
         <address>
             <p>Emails: [emails]</p>
         </address>
     </footer>
+
+<script>
+
+const { MongoClient } = require('mongodb');
+let randomizer_on = true;
+
+async function main() {
+    const mongoConnectionString = 'mongodb+srv://new-user_31:U9pYloBugi8cvaCN@mongodbserver.bwuzblx.mongodb.net/';
+    const client = new MongoClient(mongoConnectionString, { useNewUrlParser: true, useUnifiedTopology: true });
+    try {
+        await client.connect()
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+    
+}
+
+function submit_data(event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    const teamData = [];
+
+    for (let i = 1; i <= 8; i++) {
+        const inputName = `team${i}`;
+        const inputValue = document.getElementById(inputName).value;
+        teamData.push(inputValue);
+    }
+
+    if (randomizer_on) {
+        shuffleArray(teamData);
+    }
+
+}
+
+function randomizer_button() {
+    
+    if (document.getElementById('toggle_button').textContent == "Random") {
+        document.getElementById('toggle_button').textContent = "Not random";
+
+        randomizer_on = False; 
+
+    } else {
+        document.getElementById('toggle_button').textContent = "Random";
+
+        randomizer_on = True; 
+    }
+}
+
+function shuffleArray(array) {
+   for (var i = array.length - 1; i > 0; i--) { 
+  
+       var j = Math.floor(Math.random() * (i + 1));
+                  
+       var temp = array[i];
+       array[i] = array[j];
+       array[j] = temp;
+   }
+      
+   return array;
+}
+// https://www.geeksforgeeks.org/how-to-shuffle-an-array-using-javascript/
+
+</script>
+
 
 </body>
 </html>
