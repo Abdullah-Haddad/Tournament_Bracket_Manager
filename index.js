@@ -1,5 +1,5 @@
 const express = require('express');
-var mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const app = express();
 const port = 3000;
 const mongoConnectionString = 'mongodb+srv://new-user_31:U9pYloBugi8cvaCN@mongodbserver.bwuzblx.mongodb.net/';
@@ -9,6 +9,9 @@ mongoose.connect(mongoConnectionString, { useNewUrlParser: true, useUnifiedTopol
 
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');
+
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
 
 // Route for home page
 app.get('/', (req, res) => {
@@ -27,7 +30,7 @@ app.get('/tournament_bracket', (req, res) => {
 
 // Route for the login page 
 app.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login');
 });
 
 // Wildcard route for any undefined paths
