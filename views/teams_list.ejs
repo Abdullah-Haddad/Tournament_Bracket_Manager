@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
+    <script src="/client_scripts/teams_list_script.js"></script>
 
     <title>Tournament Bracket Manager</title>
 </head>
@@ -18,37 +18,37 @@
 
     <article>
         <p> 
-            <form>
+            <form id="team_form">
                 
                 <h2>Enter Teams</h2>
 
                 <label for="team1">Team 1:</label>
-                <input type="text" name="team1">
+                <input type="text" id="team1">
 
                 VS.
 
                 <label for="team2">Team 2:</label>
-                <input type="text" name="team2">
+                <input type="text" id="team2">
 
                 <hr>
 
                 <label for="team3">Team 3:</label>
-                <input type="text" name="team3">
+                <input type="text" id="team3">
 
                 VS.
 
                 <label for="team4">Team 4:</label>
-                <input type="text" name="team4">
+                <input type="text" id="team4">
 
                 <hr>
 
                 <label for="team5">Team 5:</label>
-                <input type="text" name="team5">
+                <input type="text" id="team5">
 
                 VS.
 
                 <label for="team6">Team 6:</label>
-                <input type="text" name="team6">
+                <input type="text" id="team6">
 
                 <hr>
 
@@ -102,9 +102,9 @@
 
                 <hr>
 
-                <button type="submit" onclick="main().catch(console.error)" id="submit_button">Submit</button>
-                <button type="button" onclick="randomizer_button()" id="toggle_button">Random</button>
-                <input class="button" type="reset" class ="button" value="Clear">
+                <button type="button" onclick="collect_submitted_teams()">Submit</button>
+                <button type="button" onclick="toggle_randomizer()" id="toggle_button">Random</button>
+                <input type="reset" class="button" value="Clear">
 
             </form>
         </p>
@@ -118,72 +118,6 @@
             <p>Emails: [emails]</p>
         </address>
     </footer>
-
-<script>
-
-const { MongoClient } = require('mongodb');
-let randomizer_on = true;
-
-async function main() {
-    const mongoConnectionString = 'mongodb+srv://new-user_31:U9pYloBugi8cvaCN@mongodbserver.bwuzblx.mongodb.net/';
-    const client = new MongoClient(mongoConnectionString, { useNewUrlParser: true, useUnifiedTopology: true });
-    try {
-        await client.connect()
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
-    
-}
-
-function submit_data(event) {
-    event.preventDefault(); // Prevent the form from submitting
-
-    const teamData = [];
-
-    for (let i = 1; i <= 8; i++) {
-        const inputName = `team${i}`;
-        const inputValue = document.getElementById(inputName).value;
-        teamData.push(inputValue);
-    }
-
-    if (randomizer_on) {
-        shuffleArray(teamData);
-    }
-
-}
-
-function randomizer_button() {
-    
-    if (document.getElementById('toggle_button').textContent == "Random") {
-        document.getElementById('toggle_button').textContent = "Not random";
-
-        randomizer_on = False; 
-
-    } else {
-        document.getElementById('toggle_button').textContent = "Random";
-
-        randomizer_on = True; 
-    }
-}
-
-function shuffleArray(array) {
-   for (var i = array.length - 1; i > 0; i--) { 
-  
-       var j = Math.floor(Math.random() * (i + 1));
-                  
-       var temp = array[i];
-       array[i] = array[j];
-       array[j] = temp;
-   }
-      
-   return array;
-}
-// https://www.geeksforgeeks.org/how-to-shuffle-an-array-using-javascript/
-
-</script>
-
 
 </body>
 </html>
